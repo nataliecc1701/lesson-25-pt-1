@@ -7,7 +7,7 @@ print(sys.path)
 from flask import Flask, render_template, redirect, flash, request
 
 # local imports
-from forms import AddPetForm
+from forms import AddPetForm, EditPetForm
 from models import connect_db, db, Pet
 
 app = Flask(__name__)
@@ -38,6 +38,7 @@ def show_all_pets():
 
 @app.route("/add", methods=["GET", "POST"])
 def add_pet():
+    '''Shows and receives the add pet form'''
     form = AddPetForm()
     
     if form.validate_on_submit():
@@ -55,7 +56,22 @@ def add_pet():
     else:
         return render_template("add-pet.html", form=form)
     
-@app.route("/<int:pet_ID>")
+@app.route("/<int:pet_ID>", methods = ["GET", "POST"])
 def show_pet_details(pet_ID):
+    '''Route for things specific to each pet (details and update form)'''
     pet = Pet.query.get_or_404(pet_ID)
-    return render_template("pet-info.html", pet=pet)
+    form = EditPetForm(obj = pet)
+    
+    if form.validate_on_submit():
+        # update the pet
+        pet.photo_url = form.photo_url.data
+        pet.notes = form.notes.data
+        pet.available = form.available.data
+        # send to the database
+        db.session.add(pet)
+        db.session.commit()
+        
+        flash(f"{pet.name} updated successfully")
+        return redirect("/")
+    else:
+        return render_template("pet-info.html", pet=pet, form=form)

@@ -9,5 +9,22 @@
         <li>Name: {{pet.name}}</li>
         <li>Species: {{pet.species}}</li>
         <li>Age: {% if pet.age %}{{pet.age}} years{% else %}Unknown{% endif %}</li>
+        {% if pet.notes %}<li>Notes: {{pet.notes}}</li> {% endif %}
     </ul>
+    <h2>Update Pet Information</h2>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        {% for field in form
+            if field.widget.input_type != "hidden" %}
+            <p>
+                {{field.label}}
+                {{field}}
+                
+                {% for error in field.errors %}
+                    {{ error }}
+                {% endfor %}
+            </p>
+        {% endfor %}
+        <button>Update</button>
+    </form>
 {% endblock %}
