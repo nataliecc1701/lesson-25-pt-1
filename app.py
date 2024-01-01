@@ -1,9 +1,13 @@
 '''Main App'''
 
+import sys
+print(sys.path)
+
 # Flask imports
 from flask import Flask, render_template, redirect, request
 
 # local imports
+from forms import AddPetForm
 from models import connect_db, Pet
 
 app = Flask(__name__)
@@ -32,6 +36,7 @@ def show_all_pets():
     pets = Pet.query.all()
     return render_template("all-pets.html", pets=pets)
 
-@app.route("/add", methods=["GET, POST"])
+@app.route("/add", methods=["GET", "POST"])
 def add_pet():
-    return render_template("add-pet.html")
+    form = AddPetForm()
+    return render_template("add-pet.html", form=form)
