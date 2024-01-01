@@ -28,5 +28,6 @@ connect_db(app)
 # routes
 @app.route("/")
 def show_all_pets():
+    '''Shows the index page, listing all pets'''
     pets = Pet.query.all()
     return render_template("all-pets.html", pets=pets)

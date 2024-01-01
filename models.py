@@ -1,3 +1,5 @@
+'''models for the pet shop. Contains one model: pet'''
+
 # SQLAlchemy imports
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import func
@@ -9,6 +11,7 @@ def connect_db(app):
     db.init_app(app)
     
 class Pet(db.Model):
+    '''Pet model. Name, species, photo_url, age, notes, and availability are sent to the db'''
     __tablename__ = "pets"
     
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)

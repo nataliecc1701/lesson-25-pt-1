@@ -1,3 +1,5 @@
+'''seeds file for the pet agency. includes little bunny foo-foo from the nursery rhyme'''
+
 from app import app
 from models import Pet, db
 
