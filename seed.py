@@ -1,7 +1,7 @@
 '''seeds file for the pet agency. includes little bunny foo-foo from the nursery rhyme'''
 
 from app import app
-from pet_models import Pet, db
+from models import Pet, db
 
 # need to do this in the current version of SQLAlchemy
 app.app_context().push()
