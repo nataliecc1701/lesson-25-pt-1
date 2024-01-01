@@ -3,7 +3,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, BooleanField
 
-class AddPetForm():
+class AddPetForm(FlaskForm):
     '''form to add pets'''
     name = StringField("Name of Pet")
     species = StringField("Species")
