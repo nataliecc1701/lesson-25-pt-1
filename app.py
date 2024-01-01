@@ -4,11 +4,11 @@ import sys
 print(sys.path)
 
 # Flask imports
-from flask import Flask, render_template, redirect, request
+from flask import Flask, render_template, redirect, flash, request
 
 # local imports
 from forms import AddPetForm
-from models import connect_db, Pet
+from models import connect_db, db, Pet
 
 app = Flask(__name__)
 
@@ -39,4 +39,18 @@ def show_all_pets():
 @app.route("/add", methods=["GET", "POST"])
 def add_pet():
     form = AddPetForm()
-    return render_template("add-pet.html", form=form)
+    
+    if form.validate_on_submit():
+        name = form.name.data
+        species = form.species.data
+        photo_url = form.photo_url.data
+        age = form.age.data
+        notes = form.notes.data
+        
+        new_pet = Pet(name=name, species=species, photo_url=photo_url, age=age, notes=notes)
+        db.session.add(new_pet)
+        db.session.commit()
+        flash(f"New pet added: {name}")
+        return redirect("/")
+    else:
+        return render_template("add-pet.html", form=form)
