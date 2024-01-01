@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Pet Agency: All Pets{% endblock %}
+{% block heading %}All Pets{% endblock %}
+
+{% block content %}
+    <ul>
+        <table>
+        {% for pet in pets %}
+        <tr>
+            <td>{% if pet.photo_url %}<img src="{{pet.photo_url}}"/>{% endif %}</td>
+            <td><a href="/pets/{{pet.id}}">{{pet.name}}</a>
+            {% if pet.available %}<b>Available!</b>{% endif %}</td></tr>
+        {% endfor %}
+    </table>
+    </ul>
+    <p><a href="/pets/new">Add A Pet</a></p>
+{% endblock %}
