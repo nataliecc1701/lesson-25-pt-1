@@ -1,4 +1,4 @@
-'''models for the pet shop. Contains one model: pet'''
+'''models for the pet agency. Contains one model: pet'''
 
 # SQLAlchemy imports
 from flask_sqlalchemy import SQLAlchemy
