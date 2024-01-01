@@ -9,7 +9,7 @@
         {% for pet in pets %}
         <tr>
             <td>{% if pet.photo_url %}<img src="{{pet.photo_url}}"/>{% endif %}</td>
-            <td><a href="/pets/{{pet.id}}">{{pet.name}}</a>
+            <td><a href="/{{pet.id}}">{{pet.name}}</a>
             {% if pet.available %}<b>Available!</b>{% endif %}</td></tr>
         {% endfor %}
     </table>

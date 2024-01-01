@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}Pet Agency: {{pet.name}}{% endblock %}
+{% block heading %}{{pet.name}} Details{% endblock %}
+
+{% block content %}
+    {% if pet.photo_url %}<img src="{{pet.photo_url}}"/>{% endif %}
+    <ul>
+        <li>Name: {{pet.name}}</li>
+        <li>Species: {{pet.species}}</li>
+        <li>Age: {% if pet.age %}{{pet.age}} years{% else %}Unknown{% endif %}</li>
+    </ul>
+{% endblock %}
