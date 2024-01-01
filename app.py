@@ -1,4 +1,4 @@
-
+'''Main App'''
 
 # Flask imports
 from flask import Flask, render_template, redirect, request
@@ -31,3 +31,7 @@ def show_all_pets():
     '''Shows the index page, listing all pets'''
     pets = Pet.query.all()
     return render_template("all-pets.html", pets=pets)
+
+@app.route("/add", methods=["GET, POST"])
+def add_pet():
+    return render_template("add-pet.html")
